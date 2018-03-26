@@ -5,3 +5,4 @@ $fName = "Steph";
 $lName = 
 "Mich";
 echo $fName . " " . $lName;
+echo "<p>$fName $lName</p>";

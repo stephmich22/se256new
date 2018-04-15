@@ -20,7 +20,7 @@ $company=['corp'=>"",
 		  'phone'=>""
 ];
 
-$button="Save";
+$button="Add";
 
 switch ($action){
 	case "Create":
@@ -32,10 +32,9 @@ switch ($action){
 		include_once("peopleTable.php");
 		break;
 	case "Save"://this is what button on the form is labeled
-		saveCorp($db, $corp, $email, $zipcode, $owner, $phone);
+		updateCorp($db, $corp, $email, $zipcode, $owner, $phone, $id);
 		//get all the rows
-		$corporations = getRows(); //dont need to provide any info because only dealing with one table
-		
+		$corporations = getRows(); 
 		//display the rows
 		include_once("peopleTable.php");
 		break;
@@ -60,10 +59,8 @@ switch ($action){
 		break;
 	case "Update":
 		$company = getCorp($db,$id);
+		$button = "Save";
 		include_once("personForm.php");
-		$button = "Update";
-		//$company = getCorp($db,$id);
-		//$button="Update";
 }
 
  

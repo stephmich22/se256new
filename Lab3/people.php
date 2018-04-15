@@ -44,7 +44,7 @@ function updateCorp($db, $corp, $email, $zipcode, $owner, $phone, $id) {
 	$sql->bindParam(':id', $id);
 	$sql->execute();
 	
-	return $sql->rowCount();
+	//return $sql->rowCount();
 		
 		
 	} catch (PDOException $e) {

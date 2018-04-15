@@ -9,7 +9,7 @@ function getRows() {
 	return $results; 
 }
 function saveCorp($db, $corp, $email, $zipcode, $owner, $phone) {
-	$sql = "INSERT INTO corps (corp, email, zipcode, owner, phone) VALUES (:corp, :email, :zipcode, :owner, :phone)";
+	$sql = "INSERT INTO corps VALUES (null,:corp, NOW(), :email, :zipcode, :owner, :phone)";
 	$stmt = $db->prepare($sql);
 	$stmt->bindParam(':corp',$corp);
 	//$stmt->bindParam(':incorp_dt',$incorp_dt);
@@ -20,3 +20,4 @@ function saveCorp($db, $corp, $email, $zipcode, $owner, $phone) {
 	$stmt->execute();
 	
 }
+

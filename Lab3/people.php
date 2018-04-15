@@ -1,4 +1,6 @@
 <?php
+$response = "";
+
 function getRows() {
 	
 	//select all the rows as associative array and returning
@@ -9,7 +11,7 @@ function getRows() {
 	return $results; 
 }
 function saveCorp($db, $corp, $email, $zipcode, $owner, $phone) {
-	
+	try {
 	$sql = "INSERT INTO corps VALUES (null, :corp, NOW(), :email, :zipcode, :owner, :phone)";
 	$stmt = $db->prepare($sql);
 	$stmt->bindParam(':corp',$corp);
@@ -18,7 +20,21 @@ function saveCorp($db, $corp, $email, $zipcode, $owner, $phone) {
 	$stmt->bindParam(':zipcode',$zipcode, PDO::PARAM_INT); //saying btw this is an integer
 	$stmt->bindParam(':owner',$owner);
 	$stmt->bindParam(':phone',$phone, PDO::PARAM_INT); //saying btw this is an integer
+	
 	$stmt->execute();
+	
+	if($sql == true)
+	{
+		$response = "<h2>Record successfully inserted</h2>";
+	}
+	else
+	{
+		$response = "<h2>Sorry, there was an error inserting your record.</h2>";
+	}
+	} catch(PDOException $e) {
+		die("There was a problem adding the record.");
+	}
+	
 	
 }//saveCorp() CLOSE
 
@@ -41,7 +57,7 @@ function updateCorp($db, $corp, $email, $zipcode, $owner, $phone, $id) {
 	$sql->bindParam(':zipcode',$zipcode, PDO::PARAM_INT); //saying btw this is an integer
 	$sql->bindParam(':owner',$owner);
 	$sql->bindParam(':phone',$phone, PDO::PARAM_INT); //saying btw this is an integer
-	$sql->bindParam(':id', $id);
+	$sql->bindParam(':id', $id, PDO::PARAM_INT);
 	$sql->execute();
 	
 	//return $sql->rowCount();

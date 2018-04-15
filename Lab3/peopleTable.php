@@ -36,6 +36,7 @@ $table .= "</table>" . PHP_EOL;
     </head>
     <body>
     <?php echo $title; ?>
+	<?php echo $response; ?>
     <?php echo $table; ?>
 <form action='index.php' method='get'>
 	<input type='submit' name='action' value='Create' />

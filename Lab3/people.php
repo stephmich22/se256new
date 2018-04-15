@@ -22,15 +22,8 @@ function saveCorp($db, $corp, $email, $zipcode, $owner, $phone) {
 	$stmt->bindParam(':phone',$phone, PDO::PARAM_INT); //saying btw this is an integer
 	
 	$stmt->execute();
+	$response = "<h2>Record successfully inserted</h2>";
 	
-	if($sql == true)
-	{
-		$response = "<h2>Record successfully inserted</h2>";
-	}
-	else
-	{
-		$response = "<h2>Sorry, there was an error inserting your record.</h2>";
-	}
 	} catch(PDOException $e) {
 		die("There was a problem adding the record.");
 	}

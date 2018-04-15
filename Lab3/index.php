@@ -11,8 +11,8 @@ $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING) ?? "";
 $zipcode = filter_input(INPUT_POST, 'zipcode', FILTER_SANITIZE_STRING) ?? "";
 $owner = filter_input(INPUT_POST, 'owner', FILTER_SANITIZE_STRING) ?? "";
 $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING) ?? "";
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? null;
-
+//$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? null;
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? null;
 $company=['corp'=>"",
 		  'email'=>"",
 		  'zipcode'=>"",
@@ -29,6 +29,7 @@ switch ($action){
 	case "Add":
 		saveCorp($db, $corp, $email, $zipcode, $owner, $phone);
 		$corporations = getRows();
+		$response = "<h2>*Record successfully added</h2>";
 		include_once("peopleTable.php");
 		break;
 	case "Save"://this is what button on the form is labeled
@@ -36,6 +37,7 @@ switch ($action){
 		//get all the rows
 		$corporations = getRows(); 
 		//display the rows
+		$response = "<h2>*Record successfully updated</h2>";
 		include_once("peopleTable.php");
 		break;
 	case "View":
@@ -55,6 +57,7 @@ switch ($action){
 	case "Delete":
 		deleteCorp($db, $id);
 		$corporations = getRows();
+		$response = "<h2>*Record Deleted</h2>";
 		include('peopleTable.php');
 		break;
 	case "Update":

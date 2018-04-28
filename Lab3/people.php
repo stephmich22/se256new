@@ -10,6 +10,28 @@ function getRows() {
 	$results = $stmt->fetchAll(PDO::FETCH_ASSOC);//asking for associatively indexed array and then underneath, returning that array
 	return $results; 
 }
+
+function getCorpsAsSortedTable($db, $col, $dir) {
+	try {
+		
+
+		$sql = "SELECT corp, email, zipcode, owner, phone FROM corps ORDER BY $col $dir";
+		$stmt = $db->prepare($sql);
+		/*$stmt->bindParam(':corp',$corp);
+		$stmt->bindParam(':email',$email);
+		$stmt->bindParam(':zipcode',$zipcode, PDO::PARAM_INT); //saying btw this is an integer
+		$stmt->bindParam(':owner',$owner);
+		$stmt->bindParam(':phone',$phone, PDO::PARAM_INT); //saying btw this is an integer*/
+		$stmt->execute();
+		$corps = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		//return $results;
+		
+	} catch(PDOException $e) {
+		die("There was a problem.");
+	}
+		return $corps;
+}//getCorpsAsSortedTable() CLOSE
+
 function saveCorp($db, $corp, $email, $zipcode, $owner, $phone) {
 	try {
 	$sql = "INSERT INTO corps VALUES (null, :corp, NOW(), :email, :zipcode, :owner, :phone)";
@@ -71,7 +93,47 @@ function deleteCorp($db,$id) {
 	} catch(PDOException $e) {
 		
 	}
-		
+}//deleteCorp() CLOSE
+
+function columnNames($db) {
+
+	$tableToDescribe = 'corps';
+ 
+//Query MySQL with the PDO objecy.
+//The SQL statement is: DESCRIBE [INSERT TABLE NAME]
+	$sql = $db->prepare('DESCRIBE ' . $tableToDescribe);
+	$sql->execute();
+ 
+//Fetch our result.
+$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+ 
+//The result should be an array of arrays,
+//with each array containing information about the columns
+//that the table has.
+//var_dump($result);
+ 
+ $fields = [];
+ 
+
+ 
+//For the sake of this tutorial, I will loop through the result
+//and print out the column names and their types.
+foreach($result as $column){
+    //echo "<option value='" . $column['Field'] . " - " . $column['Type'],"'>" . $column['Field'] . " - " . $column['Type'] . "</option><br >";
+	//echo "<option value='" . $column['Field'] . "'>" . $column['Field'] ."</option><br >";
+	array_push( $fields, $column['Field']);
+	//return ($fields);	
+	//var_dump($column). "<br/>" ; 
+}
+
+return $fields;
+exit;
+//	return $result;
+
+}//columnNames() CLOSE 	
+
+
+
 	
 	
-	}//deleteCorp() CLOSE
+	

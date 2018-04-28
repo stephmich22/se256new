@@ -4,7 +4,10 @@ require_once("people.php");
 
 
 
-$action = $_REQUEST['action'];
+$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ??
+    filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING) ?? NULL;
+$dir = filter_input(INPUT_GET, 'dir', FILTER_SANITIZE_STRING) ?? NULL;
+$col = filter_input(INPUT_GET, 'col', FILTER_SANITIZE_STRING) ?? NULL;
 $corp = filter_input(INPUT_POST, 'corp', FILTER_SANITIZE_STRING) ?? "";
 //$incorp_dt = $_POST['incorp_dt'];
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING) ?? "";
@@ -64,6 +67,20 @@ switch ($action){
 		$company = getCorp($db,$id);
 		$button = "Save";
 		include_once("personForm.php");
+		break;
+	case "Sort":
+	
+		//$sortable = true;
+		$corporations = getCorpsAsSortedTable($db, $col, $dir);
+		$corporations = getRows();
+		$cols = columnNames($db);
+		include_once('peopleTable.php');
+		
+		break;
+	case "Search":
+	include_once("personForm.php");
+		break;
+	//case "Reset":
 }
 
  

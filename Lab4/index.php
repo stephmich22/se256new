@@ -6,15 +6,13 @@ require_once("people.php");
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ??
     filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING) ?? NULL;
-$dir = filter_input(INPUT_GET, 'dir', FILTER_SANITIZE_STRING) ?? NULL;
-$col = filter_input(INPUT_GET, 'col', FILTER_SANITIZE_STRING) ?? NULL;
+$dir = filter_input(INPUT_GET, 'order', FILTER_SANITIZE_STRING) ?? 'ASC';
+$field = filter_input(INPUT_GET, 'sortDropDown', FILTER_SANITIZE_STRING) ?? NULL;
 $corp = filter_input(INPUT_POST, 'corp', FILTER_SANITIZE_STRING) ?? "";
-//$incorp_dt = $_POST['incorp_dt'];
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING) ?? "";
 $zipcode = filter_input(INPUT_POST, 'zipcode', FILTER_SANITIZE_STRING) ?? "";
 $owner = filter_input(INPUT_POST, 'owner', FILTER_SANITIZE_STRING) ?? "";
 $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING) ?? "";
-//$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? null;
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? null;
 $company=['corp'=>"",
 		  'email'=>"",
@@ -69,14 +67,13 @@ switch ($action){
 		include_once("personForm.php");
 		break;
 	case "Sort":
-	
 		//$sortable = true;
-		$corporations = getCorpsAsSortedTable($db, $col, $dir);
-		$corporations = getRows();
-		$cols = columnNames($db);
-		include_once('peopleTable.php');
-		
+		$corporations = getCorpsAsSortedTable($db, $field, $dir);
+		$fields = columnNames($db);
+		//include_once('peopleTable.php');
+		echo $corporations;   //// ************* just did this for testing 
 		break;
+		
 	case "Search":
 	include_once("personForm.php");
 		break;

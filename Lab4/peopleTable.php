@@ -2,26 +2,26 @@
 //people table view
 
 $title = "<h1>Corporations</h1>\n";
-$sort = "Sort Column: <select id='sortDropDown'>";
+$sort = "Sort Column:<form action='index.php' method='post'><select name='sortDropDown'>";
 $fields = columnNames($db);
 foreach($fields as $field)
 {
 	$sort .= "<option value='$field'>$field</option> \n";
 }
 $sort.=  "</select>"; 
-$asc = "Ascending:<form action='index.php' method='post'><input type='radio' name='order' value='Ascending'/></form>";
-$desc = "Descending:<form action='index.php' method='post'><input type='radio' name='order' value='Descending' /></form>";
-$btnSortSubmit = "<form action='index.php' method='get'><input id='sortSubmit' type='submit' name='action' value='Sort' /></form>";
-$btnSortReset = "<form action='index.php' method='get'><input id='sortReset' type='submit' name='action' value='Reset' /></form><br/>";
-$search = "Search Column: <select id='searchDropDown'>";
+$asc = "Ascending:<input type='radio' name='order' value='ASC'/>";
+$desc = "Descending:<input type='radio' name='order' value='DESC'/>";
+$btnSortSubmit = "<input id='sortSubmit' type='submit' name='action' value='Sort' />";
+$btnSortReset = "<input id='sortReset' type='submit' name='action' value='Reset' /></form><br/>";
+$search = "Search Column:<form action='index.php' method='get'><select id='searchDropDown'>";
 foreach($fields as $field)
 {
 	$search .= "<option value='$field'>$field</option> \n";
 }
 $search .= "</select>";
 $term = "Term: <input type='text' name='term' id = 'term' />";
-$btnSearchSubmit = "<form action='index.php' method='get'><input id='searchSubmit' type='submit' name='action' value='Search' /></form>";
-$btnSearchReset = "<form action='index.php' method='get'><input id='searchReset' type='submit' name='action' value='Reset' /></form><br/>";
+$btnSearchSubmit = "<input id='searchSubmit' type='submit' name='action' value='Search' />";
+$btnSearchReset = "<input id='searchReset' type='submit' name='action' value='Reset' /></form><br/>";
 $table = "<table>" . PHP_EOL;
 
 
@@ -37,7 +37,8 @@ foreach ($corporations as $company) {
 	
 }
 
-$table .= "</table>" . PHP_EOL;
+$table .= "</table>";
+// . PHP_EOL;
 
 
 

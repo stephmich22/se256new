@@ -11,12 +11,17 @@ function getRows() {
 	return $results; 
 }
 
-function getCorpsAsSortedTable($db, $col, $dir) {
+function getCorpsAsSortedTable($db, $field, $dir) {
 	try {
-		
 
-		$sql = "SELECT corp, email, zipcode, owner, phone FROM corps ORDER BY $col $dir";
+		$sql = "SELECT id, corp, email, zipcode, owner, phone FROM corps ORDER BY $field $dir";
+		echo $sql;
+		//exit;
 		$stmt = $db->prepare($sql);
+		
+		
+		/*$stmt = bindParam(':field', $fields);
+		$stmt = bindParam(':dir', $dir);*/
 		/*$stmt->bindParam(':corp',$corp);
 		$stmt->bindParam(':email',$email);
 		$stmt->bindParam(':zipcode',$zipcode, PDO::PARAM_INT); //saying btw this is an integer
@@ -24,12 +29,14 @@ function getCorpsAsSortedTable($db, $col, $dir) {
 		$stmt->bindParam(':phone',$phone, PDO::PARAM_INT); //saying btw this is an integer*/
 		$stmt->execute();
 		$corps = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		//return $results;
+		
 		
 	} catch(PDOException $e) {
 		die("There was a problem.");
 	}
 		return $corps;
+		
+		
 }//getCorpsAsSortedTable() CLOSE
 
 function saveCorp($db, $corp, $email, $zipcode, $owner, $phone) {

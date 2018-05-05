@@ -6,9 +6,10 @@ require_once("people.php");
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ??
     filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING) ?? NULL;
-$dir = filter_input(INPUT_GET, 'order', FILTER_SANITIZE_STRING) ?? 'ASC';
+$dir = filter_input(INPUT_GET, 'dir', FILTER_SANITIZE_STRING) ?? 'ASC';
 $field = filter_input(INPUT_GET, 'sortDropDown', FILTER_SANITIZE_STRING) ?? NULL;
 $corp = filter_input(INPUT_POST, 'corp', FILTER_SANITIZE_STRING) ?? "";
+$incorp_dt = filter_input(INPUT_POST, 'incorp_dt', FILTER_SANITIZE_STRING) ?? "";
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING) ?? "";
 $zipcode = filter_input(INPUT_POST, 'zipcode', FILTER_SANITIZE_STRING) ?? "";
 $owner = filter_input(INPUT_POST, 'owner', FILTER_SANITIZE_STRING) ?? "";
@@ -20,7 +21,8 @@ $company=['corp'=>"",
 		  'owner'=>"",
 		  'phone'=>""
 ];
-
+$searchField = filter_input(INPUT_GET, 'searchDropDown', FILTER_SANITIZE_STRING) ?? ""; 
+$term = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_STRING) ?? ""; 
 $button="Add";
 
 switch ($action){
@@ -67,17 +69,19 @@ switch ($action){
 		include_once("personForm.php");
 		break;
 	case "Sort":
-		//$sortable = true;
 		$corporations = getCorpsAsSortedTable($db, $field, $dir);
-		$fields = columnNames($db);
-		//include_once('peopleTable.php');
-		echo $corporations;   //// ************* just did this for testing 
+		include_once("peopleTable.php");
+		//echo $corporations;   //// ************* just did this for testing 
+		break;
+	case "Reset":
+		$corporations = getRows();
+		include_once("peopleTable.php");
 		break;
 		
 	case "Search":
-	include_once("personForm.php");
+		$corporations = searchCorps($db, $searchField, $term);
+		include_once("peopleTable.php");
 		break;
-	//case "Reset":
 }
 
  

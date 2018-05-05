@@ -12,32 +12,28 @@ function getRows() {
 }
 
 function getCorpsAsSortedTable($db, $field, $dir) {
-	try {
-
-		$sql = "SELECT id, corp, email, zipcode, owner, phone FROM corps ORDER BY $field $dir";
+	
+		$sql = "SELECT * FROM corps ORDER BY $field $dir";
 		echo $sql;
 		//exit;
 		$stmt = $db->prepare($sql);
-		
-		
-		/*$stmt = bindParam(':field', $fields);
-		$stmt = bindParam(':dir', $dir);*/
-		/*$stmt->bindParam(':corp',$corp);
-		$stmt->bindParam(':email',$email);
-		$stmt->bindParam(':zipcode',$zipcode, PDO::PARAM_INT); //saying btw this is an integer
-		$stmt->bindParam(':owner',$owner);
-		$stmt->bindParam(':phone',$phone, PDO::PARAM_INT); //saying btw this is an integer*/
 		$stmt->execute();
-		$corps = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		
-	} catch(PDOException $e) {
-		die("There was a problem.");
-	}
-		return $corps;
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
 		
 		
 }//getCorpsAsSortedTable() CLOSE
+
+function searchCorps($db, $searchField, $term)//searching for corporations
+{
+	$sql = "SELECT * FROM corps where $searchField LIKE '%{$term}%'";
+	echo $sql;
+	$stmt = $db->prepare($sql);
+	$stmt->bindParam(':term', $term, PDO::PARAM_STR);
+	$stmt->execute();
+	$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	return $results;
+}//searchCorps CLOSE
 
 function saveCorp($db, $corp, $email, $zipcode, $owner, $phone) {
 	try {
@@ -74,13 +70,12 @@ function updateCorp($db, $corp, $email, $zipcode, $owner, $phone, $id) {
 	try {
 		$sql = $db->prepare("UPDATE `corps` SET corp= :corp, email= :email, zipcode= :zipcode, owner= :owner, phone= :phone WHERE id= :id");
 		$sql->bindParam(':corp',$corp);
-	//$stmt->bindParam(':incorp_dt',$incorp_dt);
-	$sql->bindParam(':email',$email);
-	$sql->bindParam(':zipcode',$zipcode, PDO::PARAM_INT); //saying btw this is an integer
-	$sql->bindParam(':owner',$owner);
-	$sql->bindParam(':phone',$phone, PDO::PARAM_INT); //saying btw this is an integer
-	$sql->bindParam(':id', $id, PDO::PARAM_INT);
-	$sql->execute();
+		$sql->bindParam(':email',$email);
+		$sql->bindParam(':zipcode',$zipcode, PDO::PARAM_INT); //saying btw this is an integer
+		$sql->bindParam(':owner',$owner);
+		$sql->bindParam(':phone',$phone, PDO::PARAM_INT); //saying btw this is an integer
+		$sql->bindParam(':id', $id, PDO::PARAM_INT);
+		$sql->execute();
 	
 	//return $sql->rowCount();
 		

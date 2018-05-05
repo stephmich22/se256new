@@ -2,34 +2,34 @@
 //people table view
 
 $title = "<h1>Corporations</h1>\n";
-$sort = "Sort Column:<form action='index.php' method='post'><select name='sortDropDown'>";
+$sort = "<form action='index.php' method='get'>Sort Column:<select name='sortDropDown'>";
 $fields = columnNames($db);
 foreach($fields as $field)
 {
 	$sort .= "<option value='$field'>$field</option> \n";
 }
 $sort.=  "</select>"; 
-$asc = "Ascending:<input type='radio' name='order' value='ASC'/>";
-$desc = "Descending:<input type='radio' name='order' value='DESC'/>";
-$btnSortSubmit = "<input id='sortSubmit' type='submit' name='action' value='Sort' />";
-$btnSortReset = "<input id='sortReset' type='submit' name='action' value='Reset' /></form><br/>";
-$search = "Search Column:<form action='index.php' method='get'><select id='searchDropDown'>";
+$asc = "Ascending:<input type='radio' name='dir' value='ASC'/>";
+$desc = "Descending:<input type='radio' name='dir' value='DESC'/>";
+$btnSortSubmit = "<input type='submit' name='action' value='Sort' />";
+$btnSortReset = "<input type='button' value='Reset' /></form><br/>";
+$search = "<form action='index.php' method='get'>Search Column:<select name='searchDropDown'>";
 foreach($fields as $field)
 {
 	$search .= "<option value='$field'>$field</option> \n";
 }
 $search .= "</select>";
-$term = "Term: <input type='text' name='term' id = 'term' />";
-$btnSearchSubmit = "<input id='searchSubmit' type='submit' name='action' value='Search' />";
-$btnSearchReset = "<input id='searchReset' type='submit' name='action' value='Reset' /></form><br/>";
+$term = "Term: <input type='text' name='term' id ='term' value='' />";
+$btnSearchSubmit = "<input type='submit' name='action' value='Search' />";
+$btnSearchReset = "<input type='Reset' /></form><br/>";
 $table = "<table>" . PHP_EOL;
 
-
+/*Old reset button <input id='searchReset' type='submit' name='action' value='Reset' />*/
 
 foreach ($corporations as $company) {
 	
 	
-	$table .= "<tr><td>".$company['corp']. "</td><td><a href='?id=". $company['id'] ."&action=Read'>Read</a></td><td><a href='?id=". $company['id'] ."&action=Update'>Update</a></td><td><a href='?id=". $company['id'] ."&action=Delete'>Delete</a></td>";
+	$table .= "<form action='index.php' method='get'><tr><td>".$company['corp']. "</td><td><a href='?id=". $company['id'] ."&action=Read'>Read</a></td><td><a href='?id=". $company['id'] ."&action=Update'>Update</a></td><td><a href='?id=". $company['id'] ."&action=Delete'>Delete</a></td>";
 	$table .= "</tr>";
 	//echo "<br />";
 
@@ -67,7 +67,7 @@ $table .= "</table>";
 	<?php echo $btnSearchSubmit; ?>
 	<?php echo $btnSearchReset; ?>
     <?php echo $table; ?>
-<form action='index.php' method='get'>
+	<form action='index.php' method='get'>
 	<input type='submit' name='action' value='Create' />
 	
 </form>	

@@ -1,6 +1,8 @@
 <?php
 require_once("functions.php");
 require_once("db.php");
+//require_once("index.php");
+
 global $db;
 
 $header = "<h1>Sites App</h1>";
@@ -11,23 +13,17 @@ $header .= "<form action='index.php' method='get'>";
 $header .= "<select name='siteDropDown'>";
 $header .= "<option value=''>Choose a site</option>";
 $siteLinks = siteListingDropDown($db);
-	foreach($siteLinks as $siteLink) {
-		foreach($siteLink as $innerSiteLinks)
+
+		foreach($siteLinks as $siteLink)
 		{
-		$header .= "<option value='$innerSiteLinks'>$innerSiteLinks</option>\n";
+			$header .= "<option value='" . $siteLink['site_id'] . "' id='" . $siteLink['site_id'] ."'>" . $siteLink['site'] . "</option>\n";
 		}
 		
-	}
-	var_dump($siteLinks);
+	//var_dump($siteLinks);
 $header .= "</select>";
 $header .= "<input type='submit' name='action' value='Links' />";
 $header .= "</form>";
-$body = "";
-$results = getLinks($db, $innerSiteLinks);
-	foreach($results as $result)
-	{
-		$body .= $result;
-	}
+//global $table;
 
 
 ?>
@@ -40,10 +36,8 @@ $results = getLinks($db, $innerSiteLinks);
 			
 	</head>
 		<body>
-		
 			<?php echo $header ?>
-			<?php echo $body ?>
-		
+			<!-- <?php echo $siteLinksLinks ?> -->
 		
 		
 		</body>

@@ -11,12 +11,20 @@ $urlEntry = filter_input(INPUT_GET, 'urlEntry', FILTER_SANITIZE_STRING) ?? "";
 $site_id = filter_input(INPUT_GET, 'site_id', FILTER_VALIDATE_INT) ?? filter_input(INPUT_POST, 'site_id', FILTER_VALIDATE_INT) ?? null; 
 $site = filter_input(INPUT_POST, 'site', FILTER_SANITIZE_STRING) ?? "";
 $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING) ?? "";
-$innerSiteLinks = filter_input(INPUT_GET, 'siteDropDown', FILTER_SANITIZE_STRING) ?? NULL;
+$siteSelection = filter_input(INPUT_GET, 'siteDropDown', FILTER_SANITIZE_STRING) ?? NULL;
 //column variables for SITELINKS table
 $link = filter_input(INPUT_POST, 'link', FILTER_SANITIZE_STRING) ?? "";
+$siteLink=[ 'site_id'=>"",
+			'site'=>"",
+			'date'=>""
 
-//$file = file_get_contents($urlEntry);
 
+];
+
+$table = "";
+$body = "";
+global $siteLinks;
+global $siteLink;
 
 switch($action) {
 	
@@ -27,12 +35,34 @@ switch($action) {
 	case "Add":
 	checkForUniqueURL($db,$urlEntry);
 	submitURL($urlEntry);
+	
 	include_once("siteEntry.php");
 	break;
 	
 	case "Links":
-	getLinks($db, $innerSiteLinks);
-	echo $links;
+	$siteLinksLinks = getLinks($db, $siteSelection);
+	$siteLinksCount = count($siteLinksLinks);
+	$siteNames = getCaption($db, $siteSelection);
+	
+	foreach($siteNames as $siteName)
+	{
+	}
+	
+	$t = strtotime($siteName['date']);
+	$date = date('m/d/y H:i:s',$t);
+	
+	$table .= "<caption><b>" . $siteLinksCount . " Links found for " . $siteName['site'] . " | stored/retrieved " . $date . " </b></caption>";
+	//$table .= "<table>";
+	foreach($siteLinksLinks as $siteLinkLink)
+		{
+			/*$table .= "<tr><td><a href='" . $siteLinkLink['link'] . "' target='popup'></a></td></tr>\n";*/
+			
+			$table .= "<ul>";
+			$table .= "<li>" . $siteLinkLink['link'] . "</li>";
+			$table .= "</ul>";
+			
+		}
+	//$table .= "</table>";
 	include_once("siteListing.php");
 	break;
 	
@@ -42,4 +72,21 @@ switch($action) {
 
 
 ?>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+			<title>Sites App</title>
+			
+	</head>
+		<body>
+			
+			<?php echo $table ?>
+		
+		
+		</body>
+</html>
+
+
+
 

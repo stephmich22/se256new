@@ -1,5 +1,4 @@
 <?php
-//require_once("db.php");
 
 
 /*
@@ -13,8 +12,9 @@
 
 */
 
+
+
 function checkForUniqueURL($db,$urlEntry) {
-	
 	
 	global $db;
 	$sql = $db->prepare("SELECT * FROM sites where site = :urlEntry");
@@ -33,7 +33,7 @@ function submitURL($urlEntry) {
 	
 	$errorMessage = "";
 	global $db;
-	global $count;
+	$count = checkForUniqueURL($db,$urlEntry);
 	//$uniqueUrlCheck = checkForUniqueURL($db,$urlEntry);
 	
 	
@@ -45,7 +45,7 @@ function submitURL($urlEntry) {
 	elseif($count > 0)
 	{
 		 $errorMessage = "This website is already in the database";
-		 var_dump($count);
+		 
 	}//not a unique url CLOSE
 // -------------------url is valid and unique----------------------------------
 
@@ -53,6 +53,7 @@ function submitURL($urlEntry) {
 	{
 	$file = file_get_contents($urlEntry);
 	$arrayOfLinks = [];
+	
 	
 	if(preg_match_all('/(https?:\/\/[\da-z\.-]+\.[a-z\.]{2,6}[\/\w \.-]+)/', $file, $matches, PREG_OFFSET_CAPTURE));
 		{
@@ -66,24 +67,25 @@ function submitURL($urlEntry) {
 				}//foreach arrayoflinks CLOSE
 			}//foreach matches CLOSE
 			
-			/*foreach($arrayOfLinks as $innerArrayOfLinks)
-			{
-				print($innerArrayOfLinks) . "<h2> | </h2>"; //for visibility purposes while troubleshooting
-			}//foreach arrayoflinks CLOSE */
-			
 		}//if pregmatchall CLOSE 
 		
 		$noDuplicatesArray = [];
 		$noDuplicatesArray = array_unique($arrayOfLinks);
-		var_dump($noDuplicatesArray);
+		//var_dump($noDuplicatesArray);
 		
+		$body = "<h2>Success! " . $urlEntry . " has been added to the database, along with these links: </h2>";
+		$body .= "<ul>";
 		foreach($noDuplicatesArray as $innerNoDuplicates)
 		{
 			addLinks($db, $lastID, $innerNoDuplicates);
+			$body .= "<li>" . $innerNoDuplicates . "</li>";
+			
 		}
+		$body .= "</ul>";
 	
 	}//else url is valid and unique CLOSE()
 	echo $errorMessage;
+	echo $body;
 	//var_dump($lastID);
 }//function submitURL() CLOSE
 
@@ -97,7 +99,6 @@ function addSite($db,$site) {
 		
 		//grabbing last inserted id
 		$lastId = $db->lastInsertId();
-		echo $lastId;
 		return $lastId;
 		
 	}
@@ -119,7 +120,7 @@ function addLinks($db, $site_id, $link) {
 
 function siteListingDropDown($db) {
 	
-	$sql = $db->prepare("SELECT site, site_id from sites");
+	$sql = $db->prepare("SELECT * from sites");
 	$sql->execute();
 	
 	$result = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -136,29 +137,45 @@ function siteListingDropDown($db) {
 	
 }//siteListingDropDown
 
-function getAllLinks($db) {
-	$sql = $db->prepare("SELECT `sitelinks`.`site_id`, `sitelinks`.`link` FROM `sites`, `sitelinks` WHERE `sites`.`site_id` = `sitelinks`.`site_id`");
-	$sql->execute();
-	$allInfo = $sql->fetchAll(PDO::FETCH_ASSOC);
+function getCaption($db, $siteSelection) {
 	
-	return $allInfo;
-}
-
-function getLinks($db, $innerSiteLinks) {
-	
-	$sql = $db->prepare("SELECT site_id FROM sites WHERE site = $innerSiteLinks");
+	$sql = $db->prepare("SELECT * FROM sites WHERE sites.site_id = :siteSelection");
+	$sql->bindParam(':siteSelection', $siteSelection, PDO::PARAM_INT);
 	$sql->execute();
 	$results = $sql->fetchAll(PDO::FETCH_ASSOC);
 	
-	var_dump($results);
-	/*
-	$sql2 = $db->prepare("SELECT * FROM sitelinks where id = $results");
-	$sql2->execute();
-	$links = $sql2->fetchAll(PDO::FETCH_ASSOC);
-	*/
-	return $links;
+	return $results;
 	
 }
 
+function getLinks($db, $siteSelection) {
+	
+	$sql = $db->prepare("SELECT * FROM sitelinks WHERE sitelinks.site_id = :siteSelection");
+	$sql->bindParam(':siteSelection', $siteSelection, PDO::PARAM_INT);
+	$sql->execute();
+	$results = $sql->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $results;
+	echo $results;
+	
+}
 
+/*function getLinks($db, $siteSelection) {
+	
+	$sql = $db->prepare("SELECT * FROM sitelinks WHERE sitelinks.site_id = :siteSelection");
+	$sql->bindParam(':siteSelection', $siteSelection, PDO::PARAM_INT);
+	$sql->execute();
+	$results = $sql->fetchAll(PDO::FETCH_ASSOC);
+	
+	$table ="<table>";
+	
+	foreach($results as $siteLink)
+		{
+			$table .= "<tr><td><a href='" . $siteLink['link'] . "' target='popup'></a></td></tr>\n";
+		}
+	$table .= "</table>";
+	
+	return $table;
+	
+}*/
 ?>

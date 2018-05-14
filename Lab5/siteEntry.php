@@ -10,7 +10,9 @@ $header .= "<input type='text' name='urlEntry' id ='urlEntry' value='' />";
 $header .= "<input type='submit' name='action' value='Add'/>";
 $header .= "</form>";
 
+global $body;
 ?>
+
 
 
 <html lang="en">
@@ -18,6 +20,7 @@ $header .= "</form>";
 		<meta charset="UTF-8">
 			<title>Sites App</title>
 			<?php echo $header ?>
+			<?php echo $body ?>
 			
 	</head>
 		<body>

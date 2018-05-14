@@ -52,17 +52,18 @@ switch($action) {
 	$date = date('m/d/y H:i:s',$t);
 	
 	$table .= "<caption><b>" . $siteLinksCount . " Links found for " . $siteName['site'] . " | stored/retrieved " . $date . " </b></caption>";
-	//$table .= "<table>";
+	$table .= "<table>";
 	foreach($siteLinksLinks as $siteLinkLink)
 		{
-			/*$table .= "<tr><td><a href='" . $siteLinkLink['link'] . "' target='popup'></a></td></tr>\n";*/
+			$table .= "<tr><td><a href='" . $siteLinkLink['link'] . "' target='popup'>" . $siteLinkLink['link'] . "</a></td></tr>\n";
 			
+			/*
 			$table .= "<ul>";
 			$table .= "<li>" . $siteLinkLink['link'] . "</li>";
-			$table .= "</ul>";
+			$table .= "</ul>";*/
 			
 		}
-	//$table .= "</table>";
+	$table .= "</table>";
 	include_once("siteListing.php");
 	break;
 	

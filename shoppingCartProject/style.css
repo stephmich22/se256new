@@ -1,0 +1,104 @@
+
+#container {
+	border:1px solid black;
+	width:1000px;
+	margin:auto;
+}
+#header {
+	border:1px solid green;
+	width:1000px;
+	float:left;
+}
+#navBar {
+	border:1px solid black;
+	width:1000px;
+	float:right;
+}
+#navLinksDiv {
+	border:1px solid black;
+	width:200px;
+	float:left;
+}
+.navLinks {
+	color:pink;
+}
+#signUpLinksDiv {
+	float:right;
+	border:1px solid purple;
+	padding:10px;
+}
+#mainContent {
+	border:1px solid red;
+	width:1000px;
+	margin:auto;
+}
+h1 {
+	color:red;
+}
+#catsDiv {
+	border:1px solid black;
+	width:200px;
+	float:left;
+	margin-top:25px;
+	margin-left:25px;
+}
+#footer {
+	width:1000px;
+	height:35px;
+	border:1px solid green;
+	text-align:center;
+	clear:both;
+}
+
+/*IMAGES*/
+.displayImages {
+	width:100px;
+	height:136px;
+	
+}
+#homePic {
+	margin:auto;
+	float:right;
+}
+#homePicDiv {
+	border:1px solid green;
+	width:510px;
+	margin-right:250px;
+	margin-top:50px;
+	margin-bottom:50px;
+	float:right;
+}
+
+/*PRODUCT TABLE*/
+table {
+	border:1px solid black;
+}
+#tableDiv {
+	border:1px solid blue;
+	width:500px;
+	float:right;
+	margin-right:200px;
+	margin-top:100px;
+	margin-bottom:75px;
+	
+}
+
+tr {
+	border:1px solid black;
+}
+td {
+	border:1px solid black;
+	padding:10px;
+}
+
+/*ADMIN PAGES*/
+#adminProductsDiv {
+	border:2px solid red;
+	float:left;
+	width:480px;
+}
+#adminCatsDiv {
+	border:2px solid blue;
+	float:left;
+	width:480px;
+}

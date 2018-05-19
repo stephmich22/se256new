@@ -15,7 +15,7 @@ TABLES:
 		$categories = "<div id='catsDiv'>";
 		$categories .= "<h2>Browse Products</h2>";
 		$categories .= "<form action='index.php' method='get'>";
-		$categories .= "<select name='categoryDropDown'>";
+		$categories .= "<select name='categoryDropDown' id='categoryDropDown'>";
 		$categories .="<option value='hi'>Category</option>";
 
 	$catSelections = getCats($db);
@@ -27,7 +27,7 @@ TABLES:
 			}
 		
 		$categories .="</select>";
-		$categories .= "<input type='submit' name='action' value='Products'/>";
+		$categories .= "<br /><br /><input type='submit' name='action' value='View Products' id='btnViewProducts'/>";
 		$categories .= "</form>";
 		$categories .= "</div>"; //catsDiv CLOSE
 		
@@ -35,9 +35,9 @@ TABLES:
 		global $productList;
 		$category = filter_input(INPUT_GET, 'categoryDropDown', FILTER_SANITIZE_STRING) ?? NULL;
 		
-		$products = "<form action='index.php' method='get'>";
+	//	$products = "<form action='index.php' method='post'>";
 		//var_dump($productList);
-		
+		$products = "";
 		
 		
 	if($category !== 'hi')
@@ -49,7 +49,7 @@ TABLES:
 		
 			foreach($productList as $product)
 			{
-				$products.= "<tr><td>Product: " . $product['product'] . "</td><td>Price : " . $product['price'] . "</td><td><img class='displayImages' src='" . $product['image'] . "'></td><td><a href='?id=" . $product['product_id'] . "&action=AddToCart'>Add To Cart</a></td></tr>";
+				$products.= "<tr><td>Product: " . $product['product'] . "</td><td>Price : " . $product['price'] . "</td><td><img class='displayImages' src='" . $product['image'] . "'></td><td><form method='post' action='index.php'><input type='hidden' name='p_id' value='" . $product['product_id'] ."' /></td><td><a href='?id=" . $product['product_id'] . "&action=AddToCart'>Add To Cart</a></form></td></tr>";
 			}
 			
 		
@@ -57,13 +57,13 @@ TABLES:
 			$products .= "</div>"; //tableDiv CLOSE
 		}
 	}
-		else {
+		if($category === 'hi' || $category == NULL) {
 			$home .= "<div id='homePicDiv'>";
 			$home .= "<img src='images/homeBG.png' id='homePic'>";
 			$home .= "</div>"; //homePicDiv CLOSE
 			
 		}
-		$products .= "</form>";
+		//$products .= "</form>";
 	
 		
 
@@ -83,10 +83,8 @@ TABLES:
 			<h1>Shopping Cart Project</h1>
 			
 			<div id="navBar">
-			
-			<p>Nav Bar</p>
 			<div id="navLinksDiv">
-			<a href="products.php" class="navLinks">Home</a>
+			<a href="products.php" class="navLinks">Home</a>&middot;
 			<a href="cart.php" class="navLinks">Cart</a>
 			</div> <!-- navLinksDiv CLOSE -->
 			

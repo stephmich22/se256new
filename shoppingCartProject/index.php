@@ -19,15 +19,16 @@ $product_id = filter_input(INPUT_GET, 'product_id', FILTER_VALIDATE_INT) ?? filt
 $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT) ?? filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT) ?? null;
 $product = filter_input(INPUT_POST, 'prodName', FILTER_SANITIZE_STRING) ?? "";
 $addProdCatId =  filter_input(INPUT_GET, 'adminCatDropDown2', FILTER_VALIDATE_INT) ?? filter_input(INPUT_POST, 'adminCatDropDown2', FILTER_VALIDATE_INT) ?? null;
-$price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_STRING) ?? "";
+$price = filter_input(INPUT_GET, 'price', FILTER_VALIDATE_INT) ?? filter_input(INPUT_POST, 'price', FILTER_VALIDATE_INT) ?? null;
 $image = filter_input(INPUT_POST, 'image', FILTER_SANITIZE_STRING) ?? "";
 
 $catAdminDropDown = filter_input(INPUT_GET, 'adminCatDropDown', FILTER_SANITIZE_STRING) ?? NULL;
 $catNameText = filter_input(INPUT_POST, 'catName', FILTER_SANITIZE_STRING) ?? NULL;
 
-
+$p_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?? filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT) ?? null;
 
 $category = filter_input(INPUT_GET, 'categoryDropDown', FILTER_SANITIZE_STRING) ?? NULL;
+
 
 switch($action) {
 	
@@ -35,7 +36,7 @@ switch($action) {
 	include("products.php");
 	break;
 	
-	case "Products":
+	case "View Products":
 	$productList = getProducts($db, $category);
 	var_dump($productList);
 	include_once("products.php");
@@ -50,6 +51,14 @@ switch($action) {
 	case "Add Category":
 	addCategory($db, $catNameText);
 	include("adminPage.php");
+	break;
+	
+	case "AddToCart":
+	$cartProduct = getProduct($db,$p_id);
+	var_dump($cartProduct);
+	echo $p_id;
+	echo $price;
+	include_once("cart.php");
 	break;
 }
 

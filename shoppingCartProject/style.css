@@ -3,6 +3,7 @@
 	border:1px solid black;
 	width:1000px;
 	margin:auto;
+	font-family:calibri;
 }
 #header {
 	border:1px solid green;
@@ -18,9 +19,14 @@
 	border:1px solid black;
 	width:200px;
 	float:left;
+	margin-left:10px;
+	margin-bottom:0px;
+	margin-top:15px;
 }
 .navLinks {
 	color:pink;
+	text-decoration:none;
+	padding:3px;
 }
 #signUpLinksDiv {
 	float:right;
@@ -30,16 +36,25 @@
 #mainContent {
 	border:1px solid red;
 	width:1000px;
-	margin:auto;
+	float:left;
 }
 h1 {
 	color:red;
+	text-align:center;
 }
 #catsDiv {
 	border:1px solid black;
 	width:200px;
 	float:left;
 	margin-top:25px;
+	margin-left:25px;
+}
+#categoryDropDown {
+	width:150px;
+	text-align:center;
+	background-color:grey;
+}
+#btnViewProducts {
 	margin-left:25px;
 }
 #footer {
@@ -101,4 +116,9 @@ td {
 	border:2px solid blue;
 	float:left;
 	width:480px;
+}
+#ordersDiv {
+	float:left;
+	width:1000px;
+	border:3px solid pink;
 }

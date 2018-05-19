@@ -37,6 +37,10 @@ $prodArea .= "<br />Image: <input name='image' id='image' type='file'>";
 $prodArea .= "<br /><input name='action' type='submit' value='Add Product'>";
 $prodArea .= "</form>";
 
+//ORDERS AREA
+
+$orders = "<h2> Orders </h2>";
+$orders .= "<input type='submit' name='action' value='View Orders'>";
 
 
 
@@ -86,6 +90,9 @@ $prodArea .= "</form>";
 			<?php echo $catArea ?>
 			</div> <!-- adminCatsDiv div CLOSE -->
 				<?php  ?>
+			<div id="ordersDiv">
+				<?php echo $orders ?>
+			</div> <!-- ordersDiv CLOSE -->
 			</div> <!-- mainContent div CLOSE -->
 			<div id="footer">
 			<p>Steph's Store | Copyright&copy;2018 </p>

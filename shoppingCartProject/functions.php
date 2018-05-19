@@ -34,6 +34,14 @@ function getProducts($db, $category) {
 	$results = $sql->fetchAll(PDO::FETCH_ASSOC);
 	return $results;
 }
+function getProduct($db,$p_id)
+{
+	$sql = $db->prepare("SELECT * FROM Products WHERE product_id = :id");
+$sql->bindParam(':id',$p_id, PDO::PARAM_INT);
+	$sql->execute();
+	$results = $sql->fetch(PDO::FETCH_ASSOC);
+	return $results;
+}
 /*
 //LOGGING IN 
 function logIn {

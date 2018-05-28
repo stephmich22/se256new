@@ -138,7 +138,7 @@ $grandTotal = number_format($cartTotal, 2, '.', '');
 			?>
 			
 			</div> <!-- logOutsDiv CLOSE -->
-			<h1>Shopping Cart Project</h1>
+			<h1>Steph's Tea and Such</h1>
 			
 			<div id="navBar">
 			<div id="navLinksDiv">
@@ -148,11 +148,14 @@ $grandTotal = number_format($cartTotal, 2, '.', '');
 			</div> <!-- navLinksDiv CLOSE -->
 			
 			<div id="signUpLinksDiv">
-			<form action="index.php" method="get">
-			<a href="?action=signUp" class="signUpLinks">Sign Up! |</a>
-			<a href="?action=custPage" class="signUpLinks">My Account |</a>
-			<a href="?action=admin" class="signUpLinks">Admin Area </a>
-			</form>
+			
+			<?php if(!isset($_SESSION['username']) || $_SESSION['username'] == NULL)
+			{
+				echo "<form action='index.php' method='get'><a href='?action=SignUp' class='signUpLinks'>Sign Up! |</a>";
+			}?>
+			<a href="?action=CustPage" class="signUpLinks">My Account |</a>
+			<a href="?action=Admin" class="signUpLinks">Admin Area </a></form>
+			
 			</div> <br /><!-- signUpDiv div CLOSE -->
 			
 			</div> <!-- navBar div CLOSE -->

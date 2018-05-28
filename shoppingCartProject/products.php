@@ -98,7 +98,7 @@ TABLES:
 			?>
 			
 			</div> <!-- logOutsDiv CLOSE -->
-			<h1>Shopping Cart Project</h1>
+			<h1>Steph's Tea and Such</h1>
 			
 			<div id="navBar">
 			<div id="navLinksDiv">
@@ -109,9 +109,13 @@ TABLES:
 			
 			<div id="signUpLinksDiv">
 			<form action="index.php" method="get">
-			<a href="?action=signUp" class="signUpLinks">Sign Up! |</a>
-			<a href="?action=custPage" class="signUpLinks">My Account |</a>
-			<a href="?action=admin" class="signUpLinks">Admin Area</a>
+			<?php if(!isset($_SESSION['username']) || $_SESSION['username'] == NULL)
+			{
+				echo "<a href='?action=SignUp' class='signUpLinks'>Sign Up! |</a>";
+			}?>
+			
+			<a href="?action=CustPage" class="signUpLinks">My Account |</a>
+			<a href="?action=Admin" class="signUpLinks">Admin Area</a>
 			</form>
 			</div> <br /><!-- signUpDiv div CLOSE -->
 			

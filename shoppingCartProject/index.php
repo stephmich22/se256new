@@ -169,28 +169,30 @@ switch($action) {
 	break;
 	
 	case "Delete":
-	$la = deleteCategory($db,$catAdminDropDown);
+	deleteCategory($db,$catAdminDropDown);
 	include_once('adminPage.php');
-	var_dump($la);
 	break;
 	
 	//NAV BAR LINKS
 	
-	case "admin":
+	case "Admin":
 	$catButton = "Add Category";
 	$prodButton = "Add Product";
 	include_once("adminPage.php");
 	break;
 	
-	case "custPage":
+	case "CustPage":
+	include_once("index.php");
 	include_once("custPage.php");
 	break;
 	
 	case "Cart":
+	include_once("index.php");
 	include_once("cart.php");
 	break;
 	
-	case "signUp":
+	case "SignUp":
+	include_once("index.php");
 	include_once("signUpForm.php");
 	break;
 	
@@ -356,8 +358,23 @@ switch($action) {
 	include_once("adminPage.php");
 	break;
 	
+	//logouts 
 	
+	case "adminLogout":
+	if(isset($_SESSION['adminUsername']))
+	{
+		unset($_SESSION['adminUsername']);
+	}
+	include_once("products.php");
+	break;
 	
+	case "custLogout":
+	if(isset($_SESSION['username']))
+	{
+		unset($_SESSION['username']);
+	}
+	include_once("products.php");
+	break;
 	
 }//switch
 

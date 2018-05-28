@@ -1,7 +1,6 @@
 <?php
 require_once("db.php");
 require_once("functions.php");
-//require_once("index.php");
 
 
 /*
@@ -12,6 +11,7 @@ TABLES:
 	PRODUCTS- product_id, category_id, product, price, image
 */	
 		$home = "";
+		$homeTop = "";
 		$categories = "<div id='catsDiv'>";
 		$categories .= "<h2>Browse Products</h2>";
 		$categories .= "<form action='index.php' method='get'>";
@@ -27,7 +27,7 @@ TABLES:
 			}
 		
 		$categories .="</select>";
-		$categories .= "<br /><br /><input type='submit' name='action' value='View Products' id='btnViewProducts'/>";
+		$categories .= "<br /><br /><input type='submit' name='action' value='View Products' id='btnViewProducts' class='buttons'/>";
 		$categories .= "</form>";
 		$categories .= "</div>"; //catsDiv CLOSE
 		
@@ -49,7 +49,7 @@ TABLES:
 		
 			foreach($productList as $product)
 			{
-				$products.= "<tr><td>Product: " . $product['product'] . "</td><td>Price : " . $product['price'] . "</td><td><img class='displayImages' src='" . $product['image'] . "'></td><td><form method='post' action='index.php'><input type='hidden' name='p_id' value='" . $product['product_id'] ."' /></td><td><a href='?id=" . $product['product_id'] . "&action=AddToCart'>Add To Cart</a></form></td></tr>";
+				$products.= "<tr><td>Product: " . $product['product'] . "</td><td>Price : " . $product['price'] . "</td><td><img class='displayImages' src='" . $product['image'] . "'></td><td><input type='hidden' name='p_id' value='" . $product['product_id'] ."' /></td><td><a href='?id=" . $product['product_id'] . "&action=AddToCart'>Add To Cart</a></td></tr>";
 			}
 			
 		
@@ -58,8 +58,10 @@ TABLES:
 		}
 	}
 		if($category === 'hi' || $category == NULL) {
+				$homeTop .= "<div id='socialMediaDiv'><h2>Follow Us!</h2><image src='images/fBookLogo.png' class='socialMedia'/><image src='images/instaLogo.png' class='socialMedia'/><image src='images/twitterLogo.png' class='socialMedia'/></div>";
 			$home .= "<div id='homePicDiv'>";
-			$home .= "<img src='images/homeBG.png' id='homePic'>";
+			$home .= "<h2>Welcome :)</h2>";
+			$home .= "<image src='images/teapot.png'/>";
 			$home .= "</div>"; //homePicDiv CLOSE
 			
 		}
@@ -80,22 +82,44 @@ TABLES:
 			<div id="container">
 			
 			<div id="header">
+			<div id='logOutsDiv'>
+			<?php
+			if(isset($_SESSION['adminUsername']))
+			{
+				
+				$adminLogout = "<a href='?action=adminLogout' class='logoutLinks'>Admin Logout  |</a>";
+				echo $adminLogout;
+			}
+			if(isset($_SESSION['username']))
+			{
+				$custLogout = "<a href='?action=custLogout' class='logoutLinks'>Customer Logout</a>";
+				echo $custLogout;
+			}
+			?>
+			
+			</div> <!-- logOutsDiv CLOSE -->
 			<h1>Shopping Cart Project</h1>
 			
 			<div id="navBar">
 			<div id="navLinksDiv">
-			<a href="products.php" class="navLinks">Home</a>&middot;
-			<a href="cart.php" class="navLinks">Cart</a>
+			<form action="index.php" method="get"><a href="index.php" class="navLinks">Home |</a>
+			<a href="?action=Cart" class="navLinks">Cart</a>
+			</form>
 			</div> <!-- navLinksDiv CLOSE -->
 			
 			<div id="signUpLinksDiv">
-			<a href="adminPage.php" class="signUpLinks">Admin Login</a>
-			</div> <!-- signUpDiv div CLOSE -->
+			<form action="index.php" method="get">
+			<a href="?action=signUp" class="signUpLinks">Sign Up! |</a>
+			<a href="?action=custPage" class="signUpLinks">My Account |</a>
+			<a href="?action=admin" class="signUpLinks">Admin Area</a>
+			</form>
+			</div> <br /><!-- signUpDiv div CLOSE -->
 			
 			</div> <!-- navBar div CLOSE -->
 			</div> <!-- header div CLOSE -->
 			<div id="mainContent">
 				<?php
+					echo $homeTop;
 					echo $categories;
 					echo $home ?>
 				<?php 

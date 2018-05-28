@@ -1,5 +1,7 @@
 <?php
 
+require_once("functions.php");
+require_once("db.php");
 
 
 
@@ -49,7 +51,7 @@
 			<form action="index.php" method="get">
 			<a href="?action=signUp" class="signUpLinks">Sign Up! |</a>
 			<a href="?action=custPage" class="signUpLinks">My Account |</a>
-			<a href="?action=admin" class="signUpLinks">Admin Area</a>
+			<a href="?action=admin" class="signUpLinks">Admin Area </a>
 			</form>
 			</div> <br /><!-- signUpDiv div CLOSE -->
 			
@@ -62,13 +64,13 @@
 			<!-- log in textboxes etc -->
 			<table>
 				<tr>
-					<td>Email: </td><td><input type="text" name="email"></td>
+					<td>Email: </td><td><input type="text" name="Aemail"></td>
 				</tr>
 				<tr>
-					<td>Password: </td><td><input type="password" name="password"></td>
+					<td>Password: </td><td><input type="password" name="Apassword"></td>
 				</tr>
 				<tr>
-					<td><input type="submit" name="action" value="Login"></td>
+					<td><input type="submit" name="action" value="Login As Admin"></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td><td></td>
@@ -78,7 +80,6 @@
 			
 			</form>
 			</div> <!-- signUpFormDiv div CLOSE -->
-			<a href="signUpForm.php" class="signUpLinks">Sign Up</a>
 			</div> <!-- mainContent div CLOSE -->
 			<div id="footer">
 			<p>Steph's Store | Copyright&copy;2018 </p>

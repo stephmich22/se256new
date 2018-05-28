@@ -1,49 +1,104 @@
+body {
+	background-image:url("images/natureBodyBG.jpg");
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	color:white;
+	font-size:25px;
+}
 
 #container {
-	border:1px solid black;
+	/*border:1px solid black;*/
 	width:1000px;
 	margin:auto;
-	font-family:calibri;
+	font-family:bell mt;
 }
 #header {
-	border:1px solid green;
+	/*border:1px solid green;*/
 	width:1000px;
 	float:left;
+	background-color:rgba(0, 0, 0,.7);
 }
 #navBar {
-	border:1px solid black;
+	/*border:1px solid black;*/
 	width:1000px;
 	float:right;
+	font-size:15px;
 }
 #navLinksDiv {
-	border:1px solid black;
-	width:200px;
+	/*border:1px solid black;*/
+	width:250px;
 	float:left;
 	margin-left:10px;
 	margin-bottom:0px;
-	margin-top:15px;
+	margin-top:20px;
 }
 .navLinks {
-	color:pink;
+	color:rgba(237, 182, 216,.8);
 	text-decoration:none;
 	padding:3px;
+	font-size:20px;
+}
+.navLinks:hover {
+	color:white;
 }
 #signUpLinksDiv {
 	float:right;
-	border:1px solid purple;
-	padding:10px;
+	/*border:1px solid purple;*/
+	width:340px;
+	color:rgba(237, 182, 216,.8);
+	margin-top:10px;
+}
+.signUpLinks {
+	color:rgba(237, 182, 216,.8);
+	text-decoration:none;
+	padding:3px;
+	font-size:20px;
+}
+.signUpLinks:hover {
+	color:white;
+}
+#logOutsDiv {
+	/*border:1px solid white;*/
+	float:right;
+	margin-top:10px;
+	color:white;
+}
+.logoutLinks {
+	text-decoration:none;
+	padding:3px;
+	font-size:20px;
+	color:rgba(139, 119, 191,.8);
+}
+.logoutLinks:hover {
+	color:rgba(237, 182, 216,.8);
 }
 #mainContent {
-	border:1px solid red;
+	/*border:1px solid red;*/
 	width:1000px;
 	float:left;
+	background-color:rgba(0, 0, 0,.7);
+	margin-top:1px;
 }
 h1 {
-	color:red;
+	color:rgba(237, 182, 216,.8);
+	font-family:bell mt;
+	font-size:48px;
 	text-align:center;
+	text-shadow:1px 2px black;
+	padding-top:25px;
+}
+
+h2 {
+	color:rgba(237, 182, 216,.8);
+	font-family:bell mt;
+	font-size:30px;
+	text-align:center;
+	text-shadow:1px 2px black;
+	
 }
 #catsDiv {
-	border:1px solid black;
+	/*border:1px solid black;*/
 	width:200px;
 	float:left;
 	margin-top:25px;
@@ -52,73 +107,224 @@ h1 {
 #categoryDropDown {
 	width:150px;
 	text-align:center;
-	background-color:grey;
-}
-#btnViewProducts {
+	background-color:rgba(144, 83, 209,.6);
 	margin-left:25px;
+}
+.buttons {
+	margin-left:38px;
+	border-radius:2px;
+	padding:5px;
+	background-color:rgba(237, 182, 216,.8);
+	font-family:bell mt;
+	font-size:18px;
+}
+.buttons:hover {
+	color:white;
 }
 #footer {
 	width:1000px;
-	height:35px;
-	border:1px solid green;
+	height:55px;
+	border-top:1px solid white;
 	text-align:center;
 	clear:both;
+	background-color:rgba(0, 0, 0,.7);
+	margin-top:10px;
+	color:rgb(237, 182, 216);
+	font-size:18px;
 }
 
 /*IMAGES*/
 .displayImages {
-	width:100px;
+	width:125px;
 	height:136px;
+	border:5px solid rgba(0,0,0,.5);
+	padding:2px;
+	border-radius:3px;
 	
 }
+
+/*HOME STUFF*/
 #homePic {
 	margin:auto;
 	float:right;
 }
 #homePicDiv {
-	border:1px solid green;
+	/*border:1px solid green;*/
 	width:510px;
-	margin-right:250px;
-	margin-top:50px;
+	margin-right:235px;
 	margin-bottom:50px;
 	float:right;
+	height:600px;
+}
+#socialMediaDiv {
+	/*border:1px solid black;*/
+	width:170px;
+	float:right;
+	padding-right:25px;
+	
+	
+}
+.socialMedia {
+	width:50px;
+    height:50px;
+	padding-right:4px;
 }
 
 /*PRODUCT TABLE*/
 table {
-	border:1px solid black;
+	/*border:1px solid black;*/
+	border-radius:3px;
+	
 }
 #tableDiv {
-	border:1px solid blue;
+	/*border:1px solid blue;*/
+	border-radius:5px;
 	width:500px;
 	float:right;
 	margin-right:200px;
-	margin-top:100px;
+	margin-top:125px;
 	margin-bottom:75px;
+	/*background-color:white;*/
+	background: linear-gradient(to right, rgba(144, 83, 209,.6), rgba(237, 182, 216,.6));
+	color:black;
+	box-shadow: 15px 15px 50px 20px rgba(0,0,0,0.68);
 	
 }
 
 tr {
-	border:1px solid black;
+	border-bottom:1px solid black;
 }
 td {
-	border:1px solid black;
+	/*border:1px solid black;*/
+	border-bottom:1px solid black;
 	padding:10px;
+	color:white;
 }
 
 /*ADMIN PAGES*/
 #adminProductsDiv {
-	border:2px solid red;
+	/*border:2px solid red;*/
+	border-right:1px solid white;
 	float:left;
 	width:480px;
 }
 #adminCatsDiv {
-	border:2px solid blue;
+	/*border:2px solid blue;*/
 	float:left;
 	width:480px;
+	margin-left:15px;
 }
 #ordersDiv {
 	float:left;
 	width:1000px;
-	border:3px solid pink;
+	/*border:3px solid pink;*/
+	margin-bottom:25px;
+	padding:25px;
+}
+.aOrderTables {
+	margin:auto;
+}
+.buttonsAdmin {
+	margin-left:2px;
+	border-radius:2px;
+	padding:5px;
+	background-color:rgba(237, 182, 216,.8);
+	font-family:bell mt;
+	
+}
+#adminProdDisplayDiv {
+	float:right;
+	/*border:1px solid white;*/
+	width:1000px;
+}
+.buttonsAdmin:hover {
+	
+}
+#aProdTableDiv {
+	/*border:1px solid green;*/
+	width:705px;
+	margin:auto;
+	
+}
+#addNewAdminDiv {
+	width:800px;
+	/*border:1px solid blue;*/
+	border-bottom:1px solid white;
+	float:left;
+	
+}
+
+
+/*CART*/
+#cartTable {
+	margin:auto;
+}
+#emptyCartDiv {
+	width:505px;
+	margin:auto;
+}
+#emptyCartPic {
+	width:500;
+	height:430;
+}
+#cartLinksDiv {
+	/*border:1px solid white;*/
+	float:left;
+	padding-left:25px;
+	width:300px;
+	font-size:20px;
+}
+.cartLinks {
+	color:rgba(237, 182, 216,.8);
+	font-size:20px;
+	text-decoration:none;
+}
+.cartLinks:hover {
+	color:white;
+}
+#checkOutButtonDiv {
+	/*border:1px solid white;*/
+	width:250px;
+	float:right;
+	padding-top:25px;
+	margin-right:150px;
+	margin-bottom:25px;
+}
+#totalsDiv {
+	/*border:1px solid white;*/
+	width:175px;
+	float:right;
+	margin:auto;
+	font-size:20px;
+	color:rgb(144, 83, 209);
+}
+
+/*CUSTOMER ACCOUNT PAGE*/
+#custTablesDiv {
+/*	border:1px solid white;*/
+	width:700px;
+	float:left;
+}
+#custSideContentDiv {
+	/*border:1px solid white;*/
+	float:right;
+	position:relative;
+	width:200px;
+	height:600px;
+	
+}
+#custSideTable {
+	padding-top:25px;
+}
+h3 {
+	padding-left:100px;
+	color:rgba(139, 119, 191,.8);
+}
+
+/*SIGN UP PAGE */
+#signUpFormDiv {
+	/*border:1px solid white;*/
+	width:500px;
+	float:left;
+	margin:50px;
 }

@@ -9,37 +9,65 @@
 			<div id="container">
 			
 			<div id="header">
+			<div id='logOutsDiv'>
+			<?php
+			if(isset($_SESSION['adminUsername']))
+			{
+				
+				$adminLogout = "<a href='?action=adminLogout' class='logoutLinks'>Admin Logout  |</a>";
+				echo $adminLogout;
+			}
+			if(isset($_SESSION['username']))
+			{
+				$custLogout = "<a href='?action=custLogout' class='logoutLinks'>Customer Logout</a>";
+				echo $custLogout;
+			}
+			?>
+			
+			</div> <!-- logOutsDiv CLOSE -->
 			<h1>Shopping Cart Project</h1>
 			
 			<div id="navBar">
-			
-			<p>Nav Bar</p>
 			<div id="navLinksDiv">
-			<a href="index.php" class="navLinks">Home</a>
-			<a href="cart.php" class="navLinks">Cart</a>
+			<form action="index.php" method="get"><a href="index.php" class="navLinks">Home |</a>
+			<a href="?action=Cart" class="navLinks">Cart</a>
+			</form>
 			</div> <!-- navLinksDiv CLOSE -->
 			
-			
 			<div id="signUpLinksDiv">
-			<a href="signIn.php" class="signUpLinks">Sign In</a>
-			<a href="signUpForm.php" class="signUpLinks">Sign Up!</a>
-			</div> <!-- signUpDiv div CLOSE -->
+			<form action="index.php" method="get">
+			<a href="?action=signUp" class="signUpLinks">Sign Up! |</a>
+			<a href="?action=custPage" class="signUpLinks">My Account |</a>
+			<a href="?action=admin" class="signUpLinks">Admin Area</a>
+			</form>
+			</div> <br /><!-- signUpDiv div CLOSE -->
 			
 			</div> <!-- navBar div CLOSE -->
 			</div> <!-- header div CLOSE -->
 			<div id="mainContent">
 			
 			<div id="signUpFormDiv">
-			<form action="index.php" method="get">
+			<form action="index.php" method="post">
 			<!-- log in textboxes etc -->
-			Email: <input type="text" name="EmailSignUp" /><br>
-			Password: <input type="text" name="PasswordSignUp" /><br>
-			<input type="submit" name="action" value="Sign Up">
+			<table>
+				<tr>
+					<td>First Name: <input type="text" name="SUfname" value=""></td>
+				</tr>
+				<tr>
+					<td>Last Name: <input type="text" name="SUlname" value=""></td>
+				</tr>
+				<tr>
+					<td>Email: <input type="text" name="SUemail" value=""></td>
+				</tr>
+				<tr>
+					<td>Password: <input type="text" name="SUpw" value=""></td>
+				</tr>
+			</table>
+			<input type="submit" name="action" class="buttons" value="Sign Up">
 			
 			</form>
 			</div> <!-- signUpFormDiv div CLOSE -->
 			
-			<a href="signIn.php" class="signUpLinks">Sign In</a>
 			</div> <!-- mainContent div CLOSE -->
 			<div id="footer">
 			<p>Steph's Store | Copyright&copy;2018 </p>
